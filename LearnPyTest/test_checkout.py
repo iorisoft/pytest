@@ -9,3 +9,7 @@ def testLogoff():
 
 def testCalculation():
     assert 2 + 2 == 4
+
+
+def testgit():
+    print("hola mundo")
