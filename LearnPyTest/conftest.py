@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=False)
 def setUp():
     print("Launch Browser")
     print("login")
