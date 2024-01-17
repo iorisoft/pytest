@@ -1,18 +1,7 @@
-import pytest
 
-
-@pytest.fixture
-def setUp():
-    print("Launch Browser")
-    print("login")
-    print("Browse Products")
-    yield
-    print("Logoff")
-    print("Close Browser")
-
-def testAddItemtoCart(setUp):
+def testAddItemtoCart():
     print("Add Item Successful")
 
 
-def testRemoveItemFromCart(setUp):
+def testRemoveItemFromCart():
     print("Remove Item Successful")

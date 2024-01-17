@@ -124,6 +124,52 @@ SI NO QUE AUTOMATICAMENTE LO TOME
 
 
 #################CHECAR MAS ACERCA DE EL PARAMETRO FIXTURE SCOPE = SESSION, FUNCTION,MODULE,PACKAGE,CLASS####################
+the fixtures scope are created when first requested by a test, and are destroyed based on their scope
+@pytest.fixture(scope="session",autouse=True)
+cuando se ejecuta las pruebas  y el scope esta en session
+solamente se ejecutara 1 setup y 1 teardown
+en el intermedio se ejecutaran todas las pruebas  para ser mas agil
+el proceso de la ejecucion.
+EJEMPLO
+
+(venv) PS C:\Users\M1LESPINOS\PycharmProjects\pytest> pytest -vs .\LearnPyTest\test_cart.py
+======================================================================================================= test session starts =======================================================================================================
+platform win32 -- Python 3.11.3, pytest-7.4.4, pluggy-1.3.0 -- C:\Users\M1LESPINOS\PycharmProjects\pytest\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\M1LESPINOS\PycharmProjects\pytest
+collected 2 items
+
+LearnPyTest/test_cart.py::testAddItemtoCart Launch Browser
+login
+Browse Products
+Add Item Successful
+PASSED
+LearnPyTest/test_cart.py::testRemoveItemFromCart Remove Item Successful
+PASSEDLogoff
+Close Browser
+
+
+si se utiliza el scope function lanzara cada setup para cada prueba
+@pytest.fixture(scope="function",autouse=True)
+platform win32 -- Python 3.11.3, pytest-7.4.4, pluggy-1.3.0 -- C:\Users\M1LESPINOS\PycharmProjects\pytest\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\M1LESPINOS\PycharmProjects\pytest
+collected 2 items
+
+LearnPyTest/test_cart.py::testAddItemtoCart Launch Browser
+login
+Browse Products
+Add Item Successful
+PASSEDLogoff
+Close Browser
+
+LearnPyTest/test_cart.py::testRemoveItemFromCart Launch Browser
+login
+Browse Products
+Remove Item Successful
+PASSEDLogoff
+Close Browser
+
 
 
 PARAMETRIZACION CON PYTEST
