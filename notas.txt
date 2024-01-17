@@ -1,0 +1,133 @@
+Creation of virtual enviroment for everything  python project
+esto es para empezar con un projecto limpio y sin instalaciones
+
+python -m venv C:\Users\M1LESPINOS\PycharmProjects\pytest\venv
+
+What is Pytest?
+* Testing Framework for Python
+* Auto-discovery of test
+* Rich assertion intrsopection
+* Support parameterized and fixture-based testing
+
+install pytest on pycharm
+pip install pytest
+
+Python
+Pip (Usually, Gets installed with python)
+Pytest framework with a few test cases
+pip install allure-pytest
+se debe de editar la configuracion para que podamos ejecutar pytest
+
+NOTA cada caso de prueba forzosamente tiene que iniciar con test
+
+pytest files should have the format test_*.py or *_test.py
+and test methods/functions should start with keyword "test"
+
+
+
+
+para ejecutar el script desde terminal deberiamos de realizar lo siguiente
+
+pytest -v -s
+
+para ejecutar un varios archivos de pruebas .py deben de estar dentro de una carpeta y empezar con 
+test_moduloaqui.py
+
+para que dentro de la carpeta nos reconozca todos los test.py  y ahi podarmos ejecutarlos todos a la vez con el siguiente
+comando
+para saber mas de este tipo de propiedades consultar  pytest --help
+-v es para modo verboso  mas detalles en el test case
+-s Muestra los print que se le han añadido en cada TESTCASE
+-k keywords
+
+PARA AGRUPAR TESTCASES SE REALIZA LO SIGUIENTE
+@pytest.mark.nombre_del_modulo  (Sanity,Smoke,Regresion)
+PARA EJECUTAR TESTCASES AGRUPADOS ES DE LA SIGUIENTE FORMA 
+pytest -vm sanity (nombre del modulo agrupado)
+  -m MARKEXPR           Only run tests matching given mark expression. For example: -m 'mark1 and not mark2'.
+por ejemplo si tenemos 2 casos de pruebas en pytest  seria lo siguiente
+@pytest.mark.sanity
+def test_busqueda_appium():
+
+@pytest.mark.sanity
+def test_busqueda_pc_gamer():
+
+#COMO LOS 2 TIENEN LA AGRUPACION DE "SANITY" PARA SU EJECUCION SERIA LO SIGUIENTE
+pytest -vm sanity
+
+PARA OMITIR ALGUN TESTCASE SE PONER LA SIGUIENTE ANOTACION
+@pytest.mark.skip
+def test_simplecalculation():
+    assert 2+2 == 7
+
+La marca xfail es cuando
+mark the test function as an expected failure if any
+of the conditions evaluate to True.
+se espera que este test case falle por que aun esta en desarrollo
+o se esta trabajando
+un ejemplo cuando se ejecutan los test cases
+
+LearnPyTest/test_additems.py::testLogin PASSED                                                                                                                                                                               [  7%]
+LearnPyTest/test_additems.py::testLogoff PASSED                                                                                                                                                                              [ 15%]
+LearnPyTest/test_additems.py::testCalculation PASSED                                                                                                                                                                         [ 23%]
+LearnPyTest/test_checkout.py::testLogin PASSED                                                                                                                                                                               [ 30%]
+LearnPyTest/test_checkout.py::testLogoff PASSED                                                                                                                                                                              [ 38%]
+LearnPyTest/test_checkout.py::testCalculation PASSED                                                                                                                                                                         [ 46%]
+LearnPyTest/test_login.py::testLogin SKIPPED (unconditional skip)                                                                                                                                                            [ 53%]
+LearnPyTest/test_login.py::testLogoff PASSED                                                                                                                                                                                 [ 61%]
+LearnPyTest/test_login.py::testCalculation PASSED                                                                                                                                                                            [ 69%]
+LearnPyTest/test_login.py::testCalculation1 XFAIL                                                                                                                                                                            [ 76%]
+LearnPyTest/test_logoff.py::testLogin PASSED                                                                                                                                                                                 [ 84%]
+LearnPyTest/test_logoff.py::testLogoff PASSED                                                                                                                                                                                [ 92%]
+LearnPyTest/test_logoff.py::testCalculation PASSED                                                                                                                                                                           [100%]
+
+
+
+REPORTES CON ALLURE REPORT 
+instalar el paquete para pytest
+pip3 install allure-pytest
+este comando nos genera los archivos de json de la ejecucion
+pytest --alluredir=<path to report directory> test.py
+para generar el reporte ya en su version HTML es de la siguiente manera 
+LA RUTA DEBE SER LA MISMA DONDE SE GENERARON LOS ARCHIVOS DE JSON 
+allure serve <path to report directory>
+
+
+SI DESEAMOS CREAR RUTINAS DE PASOS DE LA SIGUIENTE MANERA CON LA ANOTACION FIXTURE
+NOTESE QUE EL METODO SETUP ESTA DENTRO DE EL TEST AÑADIR PRODUCTO COMO PARAMETRO 
+@pytest.fixture()
+def setup():
+    print("Laun Browser")
+    print("Login")
+    print("Browser products")
+
+
+def test_anadir_producto(setup):
+
+    print("se añadio el producto exitosamente")
+
+CUANDO EJECUTEMOS  OBTENDREMOS LO SIGUIENTE 
+Laun Browser
+Login
+Browser products
+se añadio el producto exitosamente
+
+EL ARCHIVO DE CONFTEST SIRVE PARA IMPORTAR METDOOS O FUNCIONES COMUNMENTE UTILIZADAS 
+SE CREA EL ARCHIVO CONFTEST Y AHI AÑADIMOS DICHOS METODOS PARA UTILIZARLOS DE MANERA MAS CLARA EN PROXIMOS TESTCASES
+
+comando YIELD INVESTIGAR
+
+PODEMOS UTILIZAR EL PARAMETRO AUTOUSE  PARA NO TENER QUE ESTAR DECLARANDO EN CADA TESTCASE EL PARAMETRO 
+SI NO QUE AUTOMATICAMENTE LO TOME 
+
+@pytest.fixture(autouse=True)
+
+
+#################CHECAR MAS ACERCA DE EL PARAMETRO FIXTURE SCOPE = SESSION, FUNCTION,MODULE,PACKAGE,CLASS####################
+
+
+PARAMETRIZACION CON PYTEST
+
+
+
+
